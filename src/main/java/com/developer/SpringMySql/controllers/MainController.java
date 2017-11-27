@@ -2,13 +2,13 @@ package com.developer.SpringMySql.controllers;
 
 import com.developer.SpringMySql.models.Courses;
 import com.developer.SpringMySql.models.CoursesRepository;
+import com.developer.SpringMySql.models.User;
+import com.developer.SpringMySql.models.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  * Created by George Stratulat on 23/11/2017.
@@ -18,11 +18,34 @@ public class MainController {
 
     @Autowired
     CoursesRepository courseRepo;
+    @Autowired
+    UsersRepository ur;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public ModelAndView doHome(){
         ModelAndView mv = new ModelAndView("index");
-        mv.addObject("lists",courseRepo.findAll());
+        return mv;
+    }
+
+    @RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
+    public ModelAndView doLoginCheck(@RequestParam("authCode") int authCode) {
+        ModelAndView mv = new ModelAndView("index");
+
+        User user = new User();
+        user = ur.findOne(authCode);
+
+        if (user != null) {
+            if (user.type.equals("student")) {
+                mv.setViewName("student");
+            }
+            else if (user.type.equals("teacher")) {
+                mv.setViewName("teacher");
+            }
+            else if (user.type.equals("admin")) {
+                mv.setViewName("admin");
+            }
+        }
+
         return mv;
     }
 

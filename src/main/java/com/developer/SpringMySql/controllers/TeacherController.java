@@ -6,6 +6,7 @@ import com.developer.SpringMySql.models.Student;
 import com.developer.SpringMySql.models.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -108,6 +109,47 @@ public class TeacherController {
         return mv2;
     }
     return mv;
+    }
+
+    @RequestMapping(value = "/saveEdit", method = RequestMethod.POST)
+    public ModelAndView doSave(@RequestParam("id") int id, @RequestParam("name_course_dk") String name_course_dk, @RequestParam("name_course_en") String name_course_en, @RequestParam("class_code") String class_code, @RequestParam("study_programme") String study_programme,
+                               @RequestParam("mandatory") String mandatory, @RequestParam("etcs") int etcs, @RequestParam("course_language") String course_language,
+                               @RequestParam("minimum_students") int minimum_students, @RequestParam("expected_students") int expected_students, @RequestParam("maximum_students") int maximum_students,
+                               @RequestParam("prerequisites") String prerequisites, @RequestParam("learning_outcome") String learning_outcome, @RequestParam("content") String content,
+                               @RequestParam("learning_activities") String learning_activities, @RequestParam("exam_form") String exam_form,
+                               @RequestParam("teachers") String teachers){
+        ModelAndView mv = new ModelAndView("redirect:/teacher");
+        Courses course = new Courses();
+        if(id != 0){
+            course = courseRepo.findOne(id);
+        }else{
+            course = new Courses();
+        }
+        course.setName_course_dk(name_course_dk);
+        course.setName_course_en(name_course_en);
+        course.setClass_code(class_code);
+        course.setStudy_programme(study_programme);
+        course.setMandatory(mandatory);
+        course.setEtcs(etcs);
+        course.setCourse_language(course_language);
+        course.setMinimum_students(minimum_students);
+        course.setExpected_students(expected_students);
+        course.setMaximum_students(maximum_students);
+        course.setPrerequisites(prerequisites);
+        course.setLearning_outcome(learning_outcome);
+        course.setContent(content);
+        course.setLearning_activities(learning_activities);
+        course.setExam_form(exam_form);
+        course.setTeachers(teachers);
+        courseRepo.save(course);
+        return mv;
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public ModelAndView doEdit(@PathVariable("id") int id){
+        ModelAndView mv = new ModelAndView("edit");
+        mv.addObject("lists", courseRepo.findOne(id));
+        return mv;
     }
 
 }

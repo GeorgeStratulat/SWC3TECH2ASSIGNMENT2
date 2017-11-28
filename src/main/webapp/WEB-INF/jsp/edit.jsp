@@ -12,7 +12,7 @@
 <body>
 <div class="container">
     <h2>Add class</h2>
-    <form class="form-horizontal" method="post" action="/save">
+    <form class="form-horizontal" method="post" action="/saveEdit">
 
         <input type="hidden" name="id" value="${lists.id}"/><br/>
 

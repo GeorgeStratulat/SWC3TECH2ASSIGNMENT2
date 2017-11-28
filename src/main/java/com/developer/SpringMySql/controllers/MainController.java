@@ -49,7 +49,7 @@ public class MainController {
         return mv;
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView doSave(@RequestParam("id") int id, @RequestParam("name_course_dk") String name_course_dk, @RequestParam("name_course_en") String name_course_en, @RequestParam("class_code") String class_code, @RequestParam("study_programme") String study_programme,
                                @RequestParam("mandatory") String mandatory, @RequestParam("etcs") int etcs, @RequestParam("course_language") String course_language,
                                @RequestParam("minimum_students") int minimum_students, @RequestParam("expected_students") int expected_students, @RequestParam("maximum_students") int maximum_students,
@@ -89,7 +89,7 @@ public class MainController {
        mv.addObject("lists", courseRepo.findOne(id));
         return mv;
     }
-
+*/
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ModelAndView doDelete(@PathVariable("id") int id){
         ModelAndView mv = new ModelAndView("redirect:/");
@@ -97,13 +97,13 @@ public class MainController {
         return mv;
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+  /*  @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView doEdit(@PathVariable("id") int id){
         ModelAndView mv = new ModelAndView("edit");
         mv.addObject("lists", courseRepo.findOne(id));
         return mv;
     }
-
+*/
 
 
 }

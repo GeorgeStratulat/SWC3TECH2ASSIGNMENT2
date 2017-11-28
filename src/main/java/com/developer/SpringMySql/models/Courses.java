@@ -51,7 +51,8 @@ public class Courses {
     public Courses() {
     }
 
-    public Courses(String name_course_dk, String name_course_en, String class_code, String study_programme, String mandatory, int etcs, String course_language, int minimum_students, int expected_students, int maximum_students, String prerequisites,String learning_outcome, String content, String learning_activities, String exam_form, String teachers) {
+    public Courses(int id,String name_course_dk, String name_course_en, String class_code, String study_programme, String mandatory, int etcs, String course_language, int minimum_students, int expected_students, int maximum_students, String prerequisites,String learning_outcome, String content, String learning_activities, String exam_form, String teachers) {
+        this.id = id;
         this.name_course_dk = name_course_dk;
         this.name_course_en = name_course_en;
         this.class_code = class_code;

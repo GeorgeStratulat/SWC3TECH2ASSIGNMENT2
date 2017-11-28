@@ -33,6 +33,10 @@
             <li class="list-group-item">${course.content}</li>
             <li class="list-group-item">${course.exam_form}</li>
             <li class="list-group-item">${course.teachers}</li>
+
+            <li class="list-group-item">
+                <a href="/edit/${course.id}">Edit</a>
+            </li>
         </ul>
 
     </div>

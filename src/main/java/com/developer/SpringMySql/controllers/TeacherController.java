@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,12 +34,14 @@ public class TeacherController {
     CoursesRepository courseRepo;
 
     @RequestMapping("/teacher")
-        public ModelAndView doHome() throws SQLException {
+        public ModelAndView doHome(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 
         ModelAndView mv = new ModelAndView("teacher");
+        int teacherId = (Integer)request.getSession().getAttribute("userId");
+
         List<Courses> listCourses = new ArrayList<>();
         Connection con = getConnection();
-        ResultSet rs = con.createStatement().executeQuery("SELECT * FROM teachers WHERE id = 1");
+        ResultSet rs = con.createStatement().executeQuery("SELECT * FROM teachers WHERE id = " + teacherId);
 
         while (rs.next()) {
             Teacher teacher = new Teacher(rs.getInt(1), rs.getString(2));
@@ -65,7 +69,8 @@ public class TeacherController {
                                      @RequestParam("minimum_students") int minimum_students, @RequestParam("expected_students") int expected_students, @RequestParam("maximum_students") int maximum_students,
                                      @RequestParam("prerequisites") String prerequisites, @RequestParam("learning_outcome") String learning_outcome, @RequestParam("content") String content,
                                      @RequestParam("learning_activities") String learning_activities, @RequestParam("exam_form") String exam_form,
-                                      @RequestParam("teachers") String teachers) throws SQLException{
+                                      @RequestParam("teachers") String teachers,
+                                      HttpServletRequest request, HttpServletResponse response) throws SQLException{
 
         Connection con = getConnection();
         ModelAndView mv = new ModelAndView("redirect:/teacher");
@@ -97,12 +102,13 @@ public class TeacherController {
 
             ModelAndView mv2 = new ModelAndView("redirect:/teacher");
 
+            int teacherId = (Integer)request.getSession().getAttribute("userId");
 
-            ResultSet rs1 = con.createStatement().executeQuery("SELECT * FROM teachers WHERE id = 1");
+            ResultSet rs1 = con.createStatement().executeQuery("SELECT * FROM teachers WHERE id = " + teacherId);
             while (rs1.next()) {
                 String course2 = rs1.getString(2);
                 String aux = course2 + "," + course.getId();
-                con.createStatement().executeUpdate("UPDATE teachers SET course_id = '" + aux + "'  WHERE id = 1");
+                con.createStatement().executeUpdate("UPDATE teachers SET course_id = '" + aux + "'  WHERE id = " + teacherId);
 
             }
 

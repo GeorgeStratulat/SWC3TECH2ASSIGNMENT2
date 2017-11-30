@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,9 +30,11 @@ public class AdminController {
     CoursesRepository CourseRepo;
 
     @RequestMapping("/admin")
-    public ModelAndView doHome() throws SQLException{
+    public ModelAndView doHome(HttpServletRequest request, HttpServletResponse response) throws SQLException{
 
         ModelAndView mv = new ModelAndView("admin");
+        int adminId = (Integer)request.getSession().getAttribute("userId");
+
         Connection con = getConnection();
         List<Courses> listCourses = new ArrayList<>();
         List<String> listStudents = new ArrayList<>();

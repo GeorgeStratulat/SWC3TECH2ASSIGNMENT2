@@ -42,6 +42,6 @@
 
 
 </c:forEach>
-
+<br><a href="/logOut">Log Out</a>
 </body>
 </html>

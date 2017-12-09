@@ -1,7 +1,5 @@
 package com.developer.SpringMySql.models;
 
-import org.springframework.stereotype.Controller;
-
 import javax.persistence.*;
 
 /**

@@ -30,46 +30,27 @@ public class AdminController {
     CoursesRepository CourseRepo;
 
     @RequestMapping("/admin")
-    public ModelAndView doHome(HttpServletRequest request, HttpServletResponse response) throws SQLException{
+    public ModelAndView doHome() throws SQLException{
 
         ModelAndView mv = new ModelAndView("admin");
-        int adminId = (Integer)request.getSession().getAttribute("userId");
 
-        Connection con = getConnection();
         List<Courses> listCourses = new ArrayList<>();
-        List<String> listStudents = new ArrayList<>();
-        ResultSet rs = con.createStatement().executeQuery("SELECT * FROM courses");
-        while(rs.next()){
-            String studentsEnrolled = "";
-            Courses course = new Courses(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8),
-                    rs.getInt(9), rs.getInt(10), rs.getInt(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16),
-                    rs.getString(17));
+        List<Student> listStudents = new ArrayList<>();
+
+        Iterable<Courses> ic = CourseRepo.findAll();
+        Iterable<Student> is = StudentRepo.findAll();
+
+        for (Courses course: ic) {
             listCourses.add(course);
-
-            ResultSet rs1 = con.createStatement().executeQuery("SELECT * FROM student");
-            while(rs1.next()){
-                int ok = 1;
-                Student student = new Student(rs1.getInt(1), rs1.getString(2));
-                String[] course_ids_split = student.getCourse_id().split(",");
-                for(int i = 0; i < course_ids_split.length; i++){
-                    if(Integer.parseInt(course_ids_split[i]) == course.getId()){
-                     ok = 0;
-                    }
-
-                }
-                if(ok == 0){
-                    studentsEnrolled = studentsEnrolled + String.valueOf(student.getId()) + ",";
-                }
-
-            }
-            if(studentsEnrolled.endsWith(",")){
-                studentsEnrolled = studentsEnrolled.substring(0, studentsEnrolled.length() - 1);
-            }
-
-            listStudents.add(studentsEnrolled);
         }
+
+        for (Student student: is) {
+            listStudents.add(student);
+        }
+
         mv.addObject("courses", listCourses);
         mv.addObject("students", listStudents);
+
         return mv;
     }
 }

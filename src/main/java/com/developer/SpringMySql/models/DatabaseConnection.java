@@ -10,15 +10,15 @@ import java.sql.SQLException;
 
 public class DatabaseConnection /*used for accessing mySql database and the tables*/ {
     private final static String URL = "jdbc:mysql://localhost:3306/";
-    private final static String DB_NAME = "swc3tech2";
-    private final static String USER = "root";
-    private final static String PASS = "";
+    private final static String DB_NAME = "mydbtech";
+    private final static String USER = "tech";
+    private final static String PASS = "password";
 
     public static Connection getConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(
-                    URL + DB_NAME,
+                    URL + DB_NAME + "?useSSL=false",
                     USER,
                     PASS);
             return con;

@@ -1,8 +1,6 @@
 package com.developer.SpringMySql.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by George Stratulat on 27/11/2017.

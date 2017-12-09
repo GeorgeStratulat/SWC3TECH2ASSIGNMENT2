@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Project</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h2>Courses which you signed up for</h2>
+<c th:each="course: ${courses}">
+    <div class="container">
+
+
+        <ul class="list-group">
+            <li th:text="${course.id}" class="list-group-item"></li>
+            <li th:text="${course.name_course_dk}" class="list-group-item"></li>
+            <li th:text="${course.name_course_en}" class="list-group-item"></li>
+            <li th:text="${course.class_code}" class="list-group-item"></li>
+            <li th:text="${course.study_programme}" class="list-group-item"></li>
+            <li th:text="${course.mandatory}" class="list-group-item"></li>
+            <li th:text="${course.etcs}" class="list-group-item"></li>
+            <li th:text="${course.course_language}" class="list-group-item"></li>
+            <li th:text="${course.minimum_students}" class="list-group-item"></li>
+            <li th:text="${course.expected_students}" class="list-group-item"></li>
+            <li th:text="${course.maximum_students}" class="list-group-item"></li>
+            <li th:text="${course.prerequisites}" class="list-group-item"></li>
+            <li th:text="${course.learning_outcome}" class="list-group-item"></li>
+            <li th:text="${course.content}" class="list-group-item"></li>
+            <li th:text="${course.exam_form}" class="list-group-item"></li>
+            <li th:text="${course.teachers}" class="list-group-item"></li>
+        </ul>
+
+
+    </div>
+
+</c>
+
+<h2>All courses: </h2>
+<c th:each="list: ${lists}">
+    <div class="container">
+
+        <h2>Course</h2>
+        <ul class="list-group">
+            <li th:text="${list.id}" class="list-group-item"></li>
+            <li th:text="${list.name_course_dk}" class="list-group-item"></li>
+            <li th:text="${list.name_course_en}"  class="list-group-item"></li>
+            <li th:text="${list.class_code}"  class="list-group-item"></li>
+            <li th:text="${list.study_programme}"  class="list-group-item"></li>
+            <li th:text="${list.mandatory}"  class="list-group-item"></li>
+            <li th:text="${list.etcs}"  class="list-group-item"></li>
+            <li th:text="${list.course_language}"  class="list-group-item"></li>
+            <li th:text="${list.minimum_students}"  class="list-group-item"></li>
+            <li th:text="${list.expected_students}"  class="list-group-item"></li>
+            <li th:text="${list.maximum_students}"  class="list-group-item"></li>
+            <li th:text="${list.prerequisites}"  class="list-group-item"></li>
+            <li th:text="${list.learning_outcome}"  class="list-group-item"></li>
+            <li th:text="${list.content}"  class="list-group-item"></li>
+            <li th:text="${list.exam_form}"  class="list-group-item"></li>
+            <li th:text="${list.teachers}"  class="list-group-item"></li>
+            <br/>
+            <form method="post" th:action="@{/signup}">
+                <input type="hidden" name="course_id" th:value="${list.id}" />
+                <input type="submit" value="Sign up" />
+            </form>
+
+        </ul>
+        <div class="col-sm-offset-2 col-sm-10">
+
+        </div>
+    </div>
+</c>
+<br/><a href="/logOut">Log Out</a>
+</body>
+</html>

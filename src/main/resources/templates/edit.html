@@ -9,162 +9,131 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-<h2>Courses which you signed up for</h2>
-<c th:each="course: ${courses}">
-    <div class="container">
-
-
-        <ul class="list-group">
-            <li th:text="${course.id}" class="list-group-item"></li>
-            <li th:text="${course.name_course_dk}" class="list-group-item"></li>
-            <li th:text="${course.name_course_en}" class="list-group-item"></li>
-            <li th:text="${course.class_code}" class="list-group-item"></li>
-            <li th:text="${course.study_programme}" class="list-group-item"></li>
-            <li th:text="${course.mandatory}" class="list-group-item"></li>
-            <li th:text="${course.etcs}" class="list-group-item"></li>
-            <li th:text="${course.course_language}" class="list-group-item"></li>
-            <li th:text="${course.minimum_students}" class="list-group-item"></li>
-            <li th:text="${course.expected_students}" class="list-group-item"></li>
-            <li th:text="${course.maximum_students}" class="list-group-item"></li>
-            <li th:text="${course.prerequisites}" class="list-group-item"></li>
-            <li th:text="${course.learning_outcome}" class="list-group-item"></li>
-            <li th:text="${course.content}" class="list-group-item"></li>
-            <li th:text="${course.exam_form}" class="list-group-item"></li>
-            <li th:text="${course.teachers}" class="list-group-item"></li>
-
-            <li class="list-group-item">
-                <a th:href="@{/edit/} + ${course.id}">Edit</a>
-            </li>
-        </ul>
-
-    </div>
-
-</c>
-
 <div class="container">
     <h2>Add class</h2>
-    <form class="form-horizontal" method="post" th:action="@{/saveteacher}">
-        <input type="hidden" name="course_id" value="" />
+    <form class="form-horizontal" method="post" th:action="@{/saveEdit}">
+
+        <input type="hidden" name="id" th:value="${lists.id}"/><br/>
+
         <div class="form-group">
             <label class="control-label col-sm-2" >Name course DK:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="name_course_dk" />
+                <input class="form-control" type="text" name="name_course_dk" th:value="${lists.name_course_dk}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Name course EN:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="name_course_en" />
+                <input class="form-control" type="text" name="name_course_en" th:value="${lists.name_course_en}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Class code:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="class_code" />
+                <input class="form-control" type="text" name="class_code" th:value="${lists.class_code}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Study programme:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="study_programme" />
+                <input class="form-control" type="text" name="study_programme" th:value="${lists.study_programme}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Mandatory:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="mandatory" />
+                <input class="form-control" type="text" name="mandatory" th:value="${lists.mandatory}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Etcs:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="etcs" />
+                <input class="form-control" type="text" name="etcs" th:value="${lists.etcs}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Course language:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="course_language" />
+                <input class="form-control" type="text" name="course_language" th:value="${lists.course_language}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Minimum number of students:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="minimum_students" />
+                <input class="form-control" type="text" name="minimum_students" th:value="${lists.minimum_students}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Expected number of students:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="expected_students" />
+                <input class="form-control" type="text" name="expected_students" th:value="${lists.expected_students}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Maximum number of students:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="maximum_students" />
+                <input class="form-control" type="text" name="maximum_students" th:value="${lists.maximum_students}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Prerequisites:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="prerequisites" />
+                <input class="form-control" type="text" name="prerequisites" th:value="${lists.prerequisites}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Learning outcome:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="learning_outcome" />
+                <input class="form-control" type="text" name="learning_outcome" th:value="${lists.learning_outcome}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Content:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="content" />
+                <input class="form-control" type="text" name="content" th:value="${lists.content}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Learning activities:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="learning_activities" />
+                <input class="form-control" type="text" name="learning_activities" th:value="${lists.learning_activities}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Exam form:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="exam_form" />
+                <input class="form-control" type="text" name="exam_form" th:value="${lists.exam_form}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" >Teachers:</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" name="teachers" />
+                <input class="form-control" type="text" name="teachers" th:value="${lists.teachers}"/>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input type="submit" value="Submit"></input>
+                <input type="submit" value="Submit" ></input>
             </div>
         </div>
     </form>
 </div>
-<br/><a th:href="@{/logOut}">Log Out</a>
+
 </body>
 </html>
